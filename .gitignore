@@ -36,3 +36,12 @@ compile_commands.json
  
 # clion
 .idea/
+
+# python
+**/build/
+**/dist/
+**/_build/
+**/_generate/
+*.py[cod]
+*.egg-info
+*env*

@@ -41,3 +41,5 @@ endif()
 if(ZENLIB_BUILD_EXAMPLES)
   add_subdirectory(samples)
 endif()
+
+add_subdirectory(python)
