@@ -86,6 +86,9 @@ PYBIND11_MODULE(pyzenlib, m)
     py::class_<decltype(ZenLoad::zCVobData::oCItem)>(m, "oCItem")
         .def_readonly("instanceName", &decltype(ZenLoad::zCVobData::oCItem)::instanceName);
 
+    py::class_<decltype(ZenLoad::zCVobData::oCMobContainer)>(m, "oCMobContainer")
+        .def_readonly("contains", &decltype(ZenLoad::zCVobData::oCMobContainer)::contains);
+
     py::class_<decltype(ZenLoad::zCVobData::oCMobLockable)>(m, "oCMobLockable")
         .def_readonly("contains", &decltype(ZenLoad::zCVobData::oCMobLockable)::contains)
         .def_readonly("locked", &decltype(ZenLoad::zCVobData::oCMobLockable)::locked)
@@ -107,6 +110,7 @@ PYBIND11_MODULE(pyzenlib, m)
         .def_readonly("childVobs", &ZenLoad::zCVobData::childVobs)
         .def_readonly("oCItem", &ZenLoad::zCVobData::oCItem)
         .def_readonly("oCMobLockable", &ZenLoad::zCVobData::oCMobLockable)
+        .def_readonly("oCMobContainer", &ZenLoad::zCVobData::oCMobContainer)
         .def_readonly("oCMOB", &ZenLoad::zCVobData::oCMOB);
 
     py::class_<VDFS::FileIndex>(m, "FileIndex")
