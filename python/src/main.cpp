@@ -2,6 +2,7 @@
 #include <pybind11/stl.h>
 #include <vdfs/fileIndex.h>
 #include <zenload/zenParser.h>
+#include <utils/logger.h>
 
 namespace py = pybind11;
 
@@ -117,7 +118,15 @@ PYBIND11_MODULE(pyzenlib, m)
         .def(py::init<>())
         .def_static("initVDFS", &VDFS::FileIndex::initVDFS)
         .def("finalizeLoad", &VDFS::FileIndex::finalizeLoad)
-        .def("loadVDF", static_cast<bool (VDFS::FileIndex::*)(const std::u16string&, const std::string&)>(&VDFS::FileIndex::loadVDF));
+        .def("loadVDF", static_cast<bool (VDFS::FileIndex::*)(const std::u16string&, const std::string&)>(&VDFS::FileIndex::loadVDF))
+        .def("getKnownFiles", &VDFS::FileIndex::getKnownFiles)
+        .def("getFileData",
+             [](const VDFS::FileIndex &fileIndex, const std::string& filePath) {
+                 auto result = std::vector<uint8_t>();
+                 fileIndex.getFileData(filePath, result);
+                 return py::bytes((char*)result.data(), result.size());
+             }
+        );
 
     m.attr("__version__") = "dev";
 }
